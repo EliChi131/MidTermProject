@@ -4,94 +4,160 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Museum of the Electric Guitar</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: Arial, sans-serif; background: #fff8f0; color: #4a2c06; margin: 0; }
+        header, footer { background: #b86b2b; color: #fff8f0; text-align: center; padding: 1.5rem 0; }
+        main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; position: relative; }
+        h1 { margin: 0 0 0.5rem 0; }
+        h2 { color: #a65c1b; border-bottom: 2px solid #e9b872; padding-bottom: 0.3rem; }
+        .timeline-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            position: relative;
+        }
+        .timeline-bar {
+            width: 40px;
+            min-width: 40px;
+            height: 100%;
+            position: relative;
+        }
+        .timeline-bar::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, #e9b872 0%, #b86b2b 100%);
+            border-radius: 3px;
+            transform: translateX(-50%);
+        }
+        .timeline-blocks {
+            flex: 1;
+            margin-left: 30px;
+        }
+        .timeline-block {
+            background: #ffe5c2;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(184,107,43,0.10);
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        .timeline-block img {
+            display: block;
+            margin: 1rem auto;
+            max-width: 320px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 1px 6px rgba(166,92,27,0.13);
+        }
+        .timeline-block h3 {
+            margin-top: 0;
+            color: #b86b2b;
+        }
+
+        @media (max-width: 700px) {
+            main { max-width: 98vw; }
+            .timeline-container { flex-direction: column; }
+            .timeline-bar { display: none; }
+            .timeline-blocks { margin-left: 0; }
+            .timeline-dot { display: none; }
+        }
+        footer { margin-top: 3rem; font-size: 1rem; }
+    </style>
 </head>
 <body>
     <header>
         <h1>Museum of the Electric Guitar</h1>
         <p>Explore the history, innovation, and cultural impact of the electric guitar.</p>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#timeline">Timeline</a></li>
-            <li><a href="#artifacts">Artifacts</a></li>
-            <li><a href="#about">About</a></li>
-        </ul>
-    </nav>
     <main>
         <section id="timeline">
-            <h2>Timeline: The Evolution of the Electric Guitar</h2>
-            <ol>
-                <li><strong>Origins: The Need for Volume (1920s–1930s)</strong><br>
-                    Acoustic guitars struggled to be heard in jazz and big‑band settings. Early inventors experimented with pickups and amplification, setting the stage for engineering innovation driven by musical necessity.
-                </li>
-                <li><strong>First Breakthrough: The Rickenbacker “Frying Pan” (1931–1932)</strong><br>
-                    The first commercially successful electric guitar, featuring a horseshoe‑style pickup. Marks the beginning of the electric guitar as a real instrument.
-                </li>
-                <li><strong>The Solid‑Body Revolution (1940s–1950s)</strong><br>
-                    Les Paul’s “Log” and the Fender Broadcaster/Telecaster proved the value of solid bodies. Gibson Les Paul combined craftsmanship with powerful tone, establishing core designs still used today.
-                </li>
-                <li><strong>Cultural Explosion and Iconic Players (1960s–1980s)</strong><br>
-                    The electric guitar became a symbol of identity, rebellion, and creativity. Iconic players like Jimi Hendrix and Eddie Van Halen redefined what was possible.
-                </li>
-                <li><strong>Technology Expands the Sound (1960s–present)</strong><br>
-                    Innovations like humbucker pickups, effects pedals, and amplifier evolution opened new creative possibilities.
-                </li>
-                <li><strong>Modern Era: Customization, Digital Tech, and Cultural Legacy (1990s–present)</strong><br>
-                    Boutique builders, digital modeling, and ongoing cultural relevance keep the electric guitar at the center of music and creativity.
-                </li>
-            </ol>
-        </section>
-        <section id="artifacts">
-            <h2>Artifacts: Key Objects in Electric Guitar History</h2>
-            <div class="artifact-grid">
-                <div class="artifact">
-                    <img src="images/fryingpan.jpg" alt="Rickenbacker Frying Pan">
-                    <h3>Rickenbacker “Frying Pan” (1931–1932)</h3>
-                    <p>The first commercially successful electric guitar. Represents the birth of electric amplification.</p>
-                </div>
-                <div class="artifact">
-                    <img src="images/lespaul_log.jpg" alt="Les Paul's Log Prototype">
-                    <h3>Les Paul’s “Log” Prototype (Early 1940s)</h3>
-                    <p>A literal 4x4 plank with pickups and hardware attached. Demonstrates the invention of the solid‑body concept.</p>
-                </div>
-                <div class="artifact">
-                    <img src="images/fender_ad.jpg" alt="Early Fender Advertisement">
-                    <h3>Early Fender Advertisements (1950s)</h3>
-                    <p>Ads and catalogs showing the new “solid‑body electric” concept and the shift toward mass production.</p>
-                </div>
-                <div class="artifact">
-                    <img src="images/humbucker.jpg" alt="Gibson PAF Humbucker">
-                    <h3>First‑Generation Humbucker Pickup (Gibson PAF, 1957)</h3>
-                    <p>The “Patent Applied For” humbucker solved the noise problem of single‑coils and defined the sound of rock, blues, and jazz.</p>
-                </div>
-                <div class="artifact">
-                    <img src="images/fuzzface.jpg" alt="Fuzz Face Pedal">
-                    <h3>Early Effects Pedals (1960s–1970s)</h3>
-                    <p>Iconic pedals like the Fuzz Face and Cry Baby Wah expanded the guitar’s expressive range.</p>
-                </div>
-                <div class="artifact">
-                    <img src="images/marshall.jpg" alt="Marshall Plexi Stack">
-                    <h3>Amplifier Milestones</h3>
-                    <p>Classic amps like the Marshall Plexi stack and Fender Bassman shaped the evolution of tone, volume, and distortion.</p>
-                </div>
-                <div class="artifact">
-                    <img src="images/woodstock.jpg" alt="Hendrix at Woodstock">
-                    <h3>Cultural Artifact: Hendrix at Woodstock (1969)</h3>
-                    <p>A photo from Hendrix’s legendary performance, symbolizing the electric guitar as a cultural and political voice.</p>
-                </div>
-                <div class="artifact">
-                    <img src="images/pod.jpg" alt="Line 6 POD">
-                    <h3>Modern Digital Modeling Unit (2000s–present)</h3>
-                    <p>Devices like the Line 6 POD and Kemper Profiler represent the shift from analog to digital and the modern era of tone modeling.</p>
+            <h2>The Electric Guitar Timeline</h2>
+            <div class="timeline-container" style="display: flex; flex-direction: row; align-items: flex-start;">
+                <nav class="vertical-timeline-nav" style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
+                    <button class="timeline-btn" data-era="0" aria-expanded="false">1920s–30s</button>
+                    <button class="timeline-btn" data-era="1" aria-expanded="false">1931–32</button>
+                    <button class="timeline-btn" data-era="2" aria-expanded="false">Early 1940s</button>
+                    <button class="timeline-btn" data-era="3" aria-expanded="false">1950s</button>
+                    <button class="timeline-btn" data-era="4" aria-expanded="false">1960s–80s</button>
+                    <button class="timeline-btn" data-era="5" aria-expanded="false">1960s–present</button>
+                    <button class="timeline-btn" data-era="6" aria-expanded="false">1990s–present</button>
+                </nav>
+                <div class="timeline-blocks" style="flex: 1;">
+                    <div class="timeline-block" data-era="0" style="display:none;">
+                        <h3>Origins: The Need for Volume (1920s–1930s)</h3>
+                        <img src="images/jazzband.jpg" alt="Jazz Band performing with acoustic guitars">
+                        <p>Acoustic guitars struggled to be heard in jazz and big‑band settings. Early inventors experimented with pickups and amplification, setting the stage for engineering innovation driven by musical necessity.</p>
+                    </div>
+                    <div class="timeline-block" data-era="1" style="display:none;">
+                        <h3>First Breakthrough: The Rickenbacker “Frying Pan” (1931–1932)</h3>
+                        <img src="images/fryingpan.jpg" alt="Rickenbacker Frying Pan">
+                        <p>The first commercially successful electric guitar, featuring a horseshoe‑style pickup. Marks the beginning of the electric guitar as a real instrument.</p>
+                    </div>
+                    <div class="timeline-block" data-era="2" style="display:none;">
+                        <div style="font-weight:bold; color:#a65c1b; margin-bottom:0.5rem;">Early 1940s</div>
+                        <h3>Les Paul’s “Log” Prototype</h3>
+                        <img src="images/lespaul_log.jpg" alt="Les Paul's Log Prototype">
+                        <p>Les Paul’s “Log” (early 1940s): a 4x4 piece of wood with pickups attached, proved that a solid body reduced feedback and increased sustain. This innovation paved the way for the modern electric guitar.</p>
+                    </div>
+                    <div class="timeline-block" data-era="3" style="display:none;">
+                        <div style="font-weight:bold; color:#a65c1b; margin-bottom:0.5rem;">1950s</div>
+                        <h3>Fender Broadcaster/Telecaster & Early Fender Ads</h3>
+                        <img src="images/fender_ad.jpg" alt="Early Fender Advertisement">
+                        <p>Fender Broadcaster/Telecaster (1950): first mass‑produced solid‑body electric guitar, simple and durable.<br>
+                        Gibson Les Paul (1952): combined craftsmanship with powerful tone, became one of the most iconic guitars in history.<br>
+                        Early Fender advertisements and catalogs show the shift toward mass production and how the electric guitar was marketed to working musicians. This era establishes the core designs still used today.</p>
+                    </div>
+                    <div class="timeline-block" data-era="4" style="display:none;">
+                        <h3>Cultural Explosion and Iconic Players (1960s–1980s)</h3>
+                        <img src="images/woodstock.jpg" alt="Hendrix at Woodstock">
+                        <p>The electric guitar becomes a symbol of identity, rebellion, and creativity. Influential figures: Jimi Hendrix, Eric Clapton, Jimmy Page, Jeff Beck, Eddie Van Halen. The guitar becomes central to rock, metal, punk, and pop. Instruments like the Stratocaster, SG, and Les Paul become cultural icons.</p>
+                    </div>
+                    <div class="timeline-block" data-era="5" style="display:none;">
+                        <h3>Technology Expands the Sound (1960s–present)</h3>
+                        <img src="images/humbucker.jpg" alt="Gibson PAF Humbucker">
+                        <p>Key innovations: single‑coil vs humbucker pickups, distortion, fuzz, overdrive, effects pedals (wah, delay, chorus, flanger), amplifier evolution (tubes → solid‑state → modeling), recording and live sound improvements. Each innovation opened new creative possibilities for players.</p>
+                        <img src="images/fuzzface.jpg" alt="Fuzz Face Pedal">
+                        <img src="images/marshall.jpg" alt="Marshall Plexi Stack">
+                    </div>
+                    <div class="timeline-block" data-era="6" style="display:none;">
+                        <h3>Modern Era: Customization, Digital Tech, and Cultural Legacy (1990s–present)</h3>
+                        <img src="images/pod.jpg" alt="Line 6 POD">
+                        <p>Rise of boutique builders and DIY modding. Digital modeling (Line 6, Kemper, Helix, Neural DSP) reshapes tone creation. The electric guitar remains a symbol of creativity and personal expression. Despite digital music trends, the guitar maintains cultural relevance in rock, pop, indie, and beyond.</p>
+                    </div>
                 </div>
             </div>
         </section>
-        <section id="about">
-            <h2>About This Museum</h2>
-            <p>This virtual museum is dedicated to the electric guitar’s journey from a volume solution to a symbol of creativity and culture. Explore the timeline, discover artifacts, and celebrate the instrument’s ongoing legacy.</p>
-        </section>
     </main>
+    <script>
+    // Timeline expand/collapse logic (only one open at a time)
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.timeline-btn');
+        const blocks = document.querySelectorAll('.timeline-block');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const era = btn.getAttribute('data-era');
+                const block = document.querySelector('.timeline-block[data-era="' + era + '"]');
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                if (!expanded) {
+                    // Close all blocks and set all buttons to collapsed
+                    blocks.forEach(b => b.style.display = 'none');
+                    buttons.forEach(b => b.setAttribute('aria-expanded', 'false'));
+                    // Open the selected block and set button to expanded
+                    block.style.display = 'block';
+                    btn.setAttribute('aria-expanded', 'true');
+                } else {
+                    // Collapse the selected block
+                    block.style.display = 'none';
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+    </script>
     <footer>
         <p>&copy; 2026 Museum of the Electric Guitar. All rights reserved.</p>
     </footer>

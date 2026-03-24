@@ -1,29 +1,35 @@
+
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f4f4f9;
-    color: #222;
+    background: #fff8f0;
+    color: #5a3a1b;
     margin: 0;
     padding: 0;
 }
 
+
 header {
-    background: #22223b;
-    color: #fff;
+    background: linear-gradient(90deg, #b86b2b 0%, #e9b872 100%);
+    color: #fff8f0;
     padding: 2rem 1rem 1rem 1rem;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(184,107,43,0.10);
 }
+
 
 header h1 {
     margin: 0 0 0.5rem 0;
     font-size: 2.5rem;
     letter-spacing: 2px;
+    color: #fff3e0;
 }
 
+
 nav {
-    background: #4a4e69;
+    background: #a65c1b;
     padding: 0.5rem 0;
     text-align: center;
+    box-shadow: 0 2px 8px rgba(166,92,27,0.08);
 }
 
 nav ul {
@@ -38,8 +44,9 @@ nav li {
     margin: 0 1.5rem;
 }
 
+
 nav a {
-    color: #fff;
+    color: #fff3e0;
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1rem;
@@ -47,69 +54,177 @@ nav a {
 }
 
 nav a:hover {
-    color: #f2e9e4;
+    color: #ffd180;
 }
 
+
 main {
-    max-width: 1100px;
+    max-width: 900px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
 section {
-    margin-bottom: 2.5rem;
-}
-
-h2 {
-    color: #22223b;
-    border-bottom: 2px solid #9a8c98;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1.2rem;
-}
-
-ol {
+        width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+        min-width: 100vw;
+        max-width: 100vw;
+        max-height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        scroll-snap-align: start;
+        position: relative;
+        padding: 0 2vw;
+        box-sizing: border-box;
+        background: #fff8f0;
+        border-bottom: 3px solid #e9b872;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
+        z-index: 1;
+    }
+    
+    .era-section.active {
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 2;
+    }
     padding-left: 1.5rem;
 }
 
-.artifact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2rem;
-    margin-top: 1.5rem;
+
+
+
+/* Full-Page Timeline Era Styles */
+.timeline {
+       width: 100vw;
+       height: 100vh;
+       min-height: 100vh;
+       margin: 0;
+       padding: 0;
+       overflow: hidden;
+       position: relative;
 }
 
-.artifact {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    padding: 1.2rem;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+.era-section {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    position: relative;
+    padding: 0 2vw;
+    box-sizing: border-box;
+    background: #fff8f0;
+    border-bottom: 3px solid #e9b872;
 }
 
-.artifact:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 6px 24px rgba(34,34,59,0.13);
+.era-section:last-child {
+    border-bottom: none;
 }
 
-.artifact img {
+.era-date {
+    position: absolute;
+    top: 2.5rem;
+    left: 2vw;
+    color: #b86b2b;
+    font-weight: bold;
+    font-size: 1.3rem;
+    background: #ffe5c2;
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    box-shadow: 0 1px 6px rgba(184,107,43,0.10);
+}
+
+.era-content {
+    background: #ffe5c2;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(184,107,43,0.13);
+    padding: 2.5rem 2rem;
+    max-width: 700px;
     width: 100%;
-    max-width: 220px;
-    height: auto;
-    border-radius: 6px;
-    margin-bottom: 0.8rem;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.10);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.artifact h3 {
-    margin: 0.5rem 0 0.3rem 0;
-    color: #4a4e69;
+.era-content img {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    border-radius: 10px;
+    margin: 1.5rem 0 1rem 0;
+    box-shadow: 0 1px 8px rgba(166,92,27,0.13);
+    display: block;
+}
+
+.era-content h3 {
+    margin: 0.5rem 0 0.7rem 0;
+    color: #b86b2b;
+    font-size: 2rem;
+}
+
+@media (max-width: 900px) {
+    .era-content {
+        padding: 1.2rem 0.5rem;
+    }
+    .era-date {
+        font-size: 1.1rem;
+        padding: 0.3rem 0.7rem;
+    }
+    .era-section {
+        padding: 0 0.5vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .era-content {
+        padding: 0.7rem 0.1rem;
+    }
+    .era-date {
+        font-size: 1rem;
+        padding: 0.2rem 0.5rem;
+        top: 1rem;
+    }
+    .era-section {
+        padding: 0 0.1vw;
+    }
+}
+
+@media (max-width: 700px) {
+    .timeline {
+        padding-left: 10px;
+        border-left-width: 3px;
+    }
+    .timeline-date {
+        left: -90px;
+        width: 70px;
+        font-size: 1rem;
+        padding-right: 4px;
+    }
+    .timeline-content {
+        padding: 1rem 0.7rem;
+    }
+    main {
+        max-width: 98vw;
+    }
+}
+    color: #b86b2b;
     font-size: 1.15rem;
 }
 
+
 footer {
-    background: #22223b;
-    color: #fff;
+    background: #b86b2b;
+    color: #fff8f0;
     text-align: center;
     padding: 1rem 0;
     margin-top: 2rem;
