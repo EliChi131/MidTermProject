@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Museum of the Electric Guitar</title>
     <style>
+        .vertical-timeline-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-right: 36px;
+            width: 220px;
+            gap: 18px;
+        }
+        .timeline-btn {
+            background: linear-gradient(90deg, #e9b872 0%, #b86b2b 100%);
+            color: #fff8f0;
+            border: none;
+            border-radius: 16px;
+            width: 200px;
+            height: 64px;
+            font-weight: bold;
+            font-size: 1.18rem;
+            box-shadow: 0 2px 8px rgba(184,107,43,0.13);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.18s, box-shadow 0.2s, font-size 0.18s;
+            outline: none;
+            text-align: center;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .timeline-btn.selected, .timeline-btn:focus {
+            background: linear-gradient(90deg, #b86b2b 0%, #e9b872 100%);
+            color: #fff8f0;
+            box-shadow: 0 4px 16px rgba(184,107,43,0.18);
+            font-size: 1.35rem;
+            transform: scale(1.13);
+            z-index: 2;
+        }
+        .timeline-btn:hover {
+            background: linear-gradient(90deg, #eab676 0%, #a65c1b 100%);
+            color: #fff3e0;
+        }
         body { font-family: Arial, sans-serif; background: #fff8f0; color: #4a2c06; margin: 0; }
         header, footer { background: #b86b2b; color: #fff8f0; text-align: center; padding: 1.5rem 0; }
         main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; position: relative; }
@@ -13,8 +53,9 @@
         .timeline-container {
             display: flex;
             flex-direction: row;
-            align-items: flex-start;
+            align-items: stretch;
             position: relative;
+            min-height: 600px;
         }
         .timeline-bar {
             width: 40px;
@@ -36,14 +77,33 @@
         .timeline-blocks {
             flex: 1;
             margin-left: 30px;
+            position: relative;
+            min-height: 400px;
+            transition: min-height 0.5s cubic-bezier(0.4,0,0.2,1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .timeline-block {
             background: #ffe5c2;
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(184,107,43,0.10);
             padding: 1.5rem;
-            margin-bottom: 2.5rem;
-            position: relative;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+            z-index: 1;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .timeline-block.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 2;
         }
         .timeline-block img {
             display: block;
@@ -87,23 +147,23 @@
                     <button class="timeline-btn" data-era="6" aria-expanded="false">1990s–present</button>
                 </nav>
                 <div class="timeline-blocks" style="flex: 1;">
-                    <div class="timeline-block" data-era="0" style="display:none;">
+                    <div class="timeline-block" data-era="0">
                         <h3>Origins: The Need for Volume (1920s–1930s)</h3>
                         <img src="images/jazzband.jpg" alt="Jazz Band performing with acoustic guitars">
                         <p>Acoustic guitars struggled to be heard in jazz and big‑band settings. Early inventors experimented with pickups and amplification, setting the stage for engineering innovation driven by musical necessity.</p>
                     </div>
-                    <div class="timeline-block" data-era="1" style="display:none;">
+                    <div class="timeline-block" data-era="1">
                         <h3>First Breakthrough: The Rickenbacker “Frying Pan” (1931–1932)</h3>
                         <img src="images/fryingpan.jpg" alt="Rickenbacker Frying Pan">
                         <p>The first commercially successful electric guitar, featuring a horseshoe‑style pickup. Marks the beginning of the electric guitar as a real instrument.</p>
                     </div>
-                    <div class="timeline-block" data-era="2" style="display:none;">
+                    <div class="timeline-block" data-era="2">
                         <div style="font-weight:bold; color:#a65c1b; margin-bottom:0.5rem;">Early 1940s</div>
                         <h3>Les Paul’s “Log” Prototype</h3>
                         <img src="images/lespaul_log.jpg" alt="Les Paul's Log Prototype">
                         <p>Les Paul’s “Log” (early 1940s): a 4x4 piece of wood with pickups attached, proved that a solid body reduced feedback and increased sustain. This innovation paved the way for the modern electric guitar.</p>
                     </div>
-                    <div class="timeline-block" data-era="3" style="display:none;">
+                    <div class="timeline-block" data-era="3">
                         <div style="font-weight:bold; color:#a65c1b; margin-bottom:0.5rem;">1950s</div>
                         <h3>Fender Broadcaster/Telecaster & Early Fender Ads</h3>
                         <img src="images/fender_ad.jpg" alt="Early Fender Advertisement">
@@ -111,19 +171,19 @@
                         Gibson Les Paul (1952): combined craftsmanship with powerful tone, became one of the most iconic guitars in history.<br>
                         Early Fender advertisements and catalogs show the shift toward mass production and how the electric guitar was marketed to working musicians. This era establishes the core designs still used today.</p>
                     </div>
-                    <div class="timeline-block" data-era="4" style="display:none;">
+                    <div class="timeline-block" data-era="4">
                         <h3>Cultural Explosion and Iconic Players (1960s–1980s)</h3>
                         <img src="images/woodstock.jpg" alt="Hendrix at Woodstock">
                         <p>The electric guitar becomes a symbol of identity, rebellion, and creativity. Influential figures: Jimi Hendrix, Eric Clapton, Jimmy Page, Jeff Beck, Eddie Van Halen. The guitar becomes central to rock, metal, punk, and pop. Instruments like the Stratocaster, SG, and Les Paul become cultural icons.</p>
                     </div>
-                    <div class="timeline-block" data-era="5" style="display:none;">
+                    <div class="timeline-block" data-era="5">
                         <h3>Technology Expands the Sound (1960s–present)</h3>
                         <img src="images/humbucker.jpg" alt="Gibson PAF Humbucker">
                         <p>Key innovations: single‑coil vs humbucker pickups, distortion, fuzz, overdrive, effects pedals (wah, delay, chorus, flanger), amplifier evolution (tubes → solid‑state → modeling), recording and live sound improvements. Each innovation opened new creative possibilities for players.</p>
                         <img src="images/fuzzface.jpg" alt="Fuzz Face Pedal">
                         <img src="images/marshall.jpg" alt="Marshall Plexi Stack">
                     </div>
-                    <div class="timeline-block" data-era="6" style="display:none;">
+                    <div class="timeline-block" data-era="6">
                         <h3>Modern Era: Customization, Digital Tech, and Cultural Legacy (1990s–present)</h3>
                         <img src="images/pod.jpg" alt="Line 6 POD">
                         <p>Rise of boutique builders and DIY modding. Digital modeling (Line 6, Kemper, Helix, Neural DSP) reshapes tone creation. The electric guitar remains a symbol of creativity and personal expression. Despite digital music trends, the guitar maintains cultural relevance in rock, pop, indie, and beyond.</p>
@@ -133,26 +193,44 @@
         </section>
     </main>
     <script>
-    // Timeline expand/collapse logic (only one open at a time)
+    // Robust timeline hover logic: one box always open, nav is fixed width, selected button scales but does not shift others
     document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('.timeline-btn');
         const blocks = document.querySelectorAll('.timeline-block');
+        const container = document.querySelector('.timeline-blocks');
+        let selectedEra = '0';
+        function showEra(era) {
+            blocks.forEach(b => b.classList.remove('active'));
+            buttons.forEach(b => b.classList.remove('selected'));
+            const block = document.querySelector('.timeline-block[data-era="' + era + '"]');
+            const btn = document.querySelector('.timeline-btn[data-era="' + era + '"]');
+            if (block && btn) {
+                block.classList.add('active');
+                btn.classList.add('selected');
+                setTimeout(() => {
+                    container.style.minHeight = block.offsetHeight + 'px';
+                }, 10);
+                selectedEra = era;
+            }
+        }
+        // Set up hover events
         buttons.forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('mouseenter', function() {
                 const era = btn.getAttribute('data-era');
-                const block = document.querySelector('.timeline-block[data-era="' + era + '"]');
-                const expanded = btn.getAttribute('aria-expanded') === 'true';
-                if (!expanded) {
-                    // Close all blocks and set all buttons to collapsed
-                    blocks.forEach(b => b.style.display = 'none');
-                    buttons.forEach(b => b.setAttribute('aria-expanded', 'false'));
-                    // Open the selected block and set button to expanded
-                    block.style.display = 'block';
-                    btn.setAttribute('aria-expanded', 'true');
-                } else {
-                    // Collapse the selected block
-                    block.style.display = 'none';
-                    btn.setAttribute('aria-expanded', 'false');
+                showEra(era);
+            });
+        });
+        // Always have the first box open on load
+        showEra('0');
+        // Keyboard accessibility: arrow keys to move selection
+        buttons.forEach((btn, idx) => {
+            btn.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowDown' && idx < buttons.length - 1) {
+                    buttons[idx + 1].focus();
+                    showEra(buttons[idx + 1].getAttribute('data-era'));
+                } else if (e.key === 'ArrowUp' && idx > 0) {
+                    buttons[idx - 1].focus();
+                    showEra(buttons[idx - 1].getAttribute('data-era'));
                 }
             });
         });
