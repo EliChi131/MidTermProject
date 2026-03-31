@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listen | Museum of the Electric Guitar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-display: "Fraunces", "Times New Roman", serif;
+            --font-ui: "Manrope", "Segoe UI", sans-serif;
+            --text-strong: #21374d;
+            --text-body: #3d556d;
+            --surface: #edf6ff;
+            --surface-strong: #d7e9f9;
+            --accent: #9fbfdd;
+            --accent-deep: #6f90af;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-ui);
+            line-height: 1.68;
+            color: var(--text-body);
+            background:
+                radial-gradient(120% 90% at 10% 0%, #f7fcff 0%, rgba(247, 252, 255, 0) 55%),
+                radial-gradient(110% 100% at 100% 10%, #deefff 0%, rgba(222, 239, 255, 0) 52%),
+                linear-gradient(165deg, #deeeff 0%, #c8ddf2 48%, #afc9e4 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--accent);
+            color: #f7fbff;
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: var(--font-display);
+            font-weight: 650;
+            letter-spacing: -0.012em;
+            line-height: 1.1;
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        header p {
+            margin: 0.35rem 0 0;
+            font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+            color: #eef6ff;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .listen-intro {
+            background: rgba(248, 252, 255, 0.96);
+            border: 2px solid #c0d8ec;
+            border-radius: 14px;
+            padding: 1.2rem;
+            box-shadow: 0 10px 26px rgba(87, 116, 145, 0.2);
+            margin-bottom: 1.25rem;
+        }
+
+        .listen-intro h2 {
+            margin: 0 0 0.45rem;
+            font-family: var(--font-display);
+            color: var(--text-strong);
+            font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+            line-height: 1.14;
+        }
+
+        .listen-carousel {
+            position: relative;
+            margin-bottom: 1rem;
+            perspective: 1400px;
+        }
+
+        .carousel-viewport {
+            overflow: hidden;
+            border-radius: 16px;
+            padding: 0.45rem 0.2rem 0.85rem;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 1rem;
+            transition: transform 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+            will-change: transform;
+            align-items: stretch;
+        }
+
+        .carousel-slide {
+            flex: 0 0 78%;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+            pointer-events: none;
+            transition: z-index 260ms ease;
+        }
+
+        .audio-card {
+            background: var(--surface);
+            border: 1px solid #c3dbef;
+            border-radius: 12px;
+            box-shadow: 0 5px 14px rgba(104, 133, 164, 0.2);
+            padding: 1rem;
+            min-height: 220px;
+            transform: scale(0.92);
+            opacity: 0.56;
+            filter: saturate(0.88) blur(0.4px);
+            transition: transform 420ms ease, opacity 420ms ease, box-shadow 420ms ease, filter 420ms ease;
+            transform-origin: center center;
+            backface-visibility: hidden;
+        }
+
+        .carousel-slide.is-active .audio-card {
+            transform: scale(1);
+            opacity: 1;
+            box-shadow: 0 12px 24px rgba(97, 128, 160, 0.28);
+            filter: none;
+        }
+
+        .carousel-slide.is-prev .audio-card {
+            transform: translateX(12%) scale(0.93);
+            opacity: 0.68;
+            filter: saturate(0.92) blur(0.2px);
+        }
+
+        .carousel-slide.is-next .audio-card {
+            transform: translateX(-12%) scale(0.93);
+            opacity: 0.68;
+            filter: saturate(0.92) blur(0.2px);
+        }
+
+        .carousel-slide.is-active {
+            z-index: 3;
+            pointer-events: auto;
+        }
+
+        .carousel-slide.is-prev,
+        .carousel-slide.is-next {
+            z-index: 2;
+        }
+
+        .carousel-slide.flip-from-next .audio-card {
+            animation: flipInFromNext 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .carousel-slide.flip-from-prev .audio-card {
+            animation: flipInFromPrev 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes flipInFromNext {
+            0% {
+                transform: rotateY(-32deg) translateX(12%) scale(0.9);
+                opacity: 0.56;
+            }
+
+            100% {
+                transform: rotateY(0deg) translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes flipInFromPrev {
+            0% {
+                transform: rotateY(32deg) translateX(-12%) scale(0.9);
+                opacity: 0.56;
+            }
+
+            100% {
+                transform: rotateY(0deg) translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .audio-card h3 {
+            margin: 0 0 0.35rem;
+            color: #4f6f8f;
+            font-size: 1.03rem;
+            font-family: var(--font-display);
+            font-weight: 650;
+            letter-spacing: -0.004em;
+        }
+
+        .audio-card p {
+            margin: 0 0 0.65rem;
+            font-size: 0.95rem;
+        }
+
+        .audio-card audio {
+            width: 100%;
+        }
+
+        .carousel-controls {
+            margin-top: 0.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .carousel-arrow {
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(150deg, #d5e8f9 0%, #bdd8f1 100%);
+            color: #35516d;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 5px 12px rgba(115, 146, 178, 0.28);
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .carousel-arrow:hover,
+        .carousel-arrow:focus-visible {
+            transform: translateY(-1px);
+            box-shadow: 0 9px 16px rgba(96, 128, 160, 0.35);
+            outline: none;
+        }
+
+        .nav-row {
+            margin-top: 1.25rem;
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            border: none;
+            border-radius: 999px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #c3e0fb 0%, #a9ccee 100%);
+            color: #2f4a66;
+            font-size: 0.8rem;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            font-weight: 800;
+            padding: 0.7rem 1rem;
+            box-shadow: 0 3px 10px rgba(116, 151, 185, 0.3);
+        }
+
+        .nav-btn.secondary {
+            background: linear-gradient(90deg, #d8ebfb 0%, #c5def5 100%);
+            color: #3f5c79;
+        }
+
+        footer {
+            margin-top: 2.4rem;
+            padding: 1rem;
+            text-align: center;
+            color: #f7fbff;
+            background: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+        }
+
+        @media (max-width: 620px) {
+            .carousel-viewport {
+                padding-bottom: 0.65rem;
+            }
+
+            .carousel-track {
+                gap: 0.55rem;
+            }
+
+            .carousel-slide {
+                flex-basis: 88%;
+            }
+
+            .audio-card {
+                min-height: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .carousel-track,
+            .audio-card,
+            .carousel-arrow {
+                transition-duration: 0.01ms !important;
+            }
+
+            .carousel-slide.flip-from-next .audio-card,
+            .carousel-slide.flip-from-prev .audio-card {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Listen Gallery</h1>
+        <p>Audio tour clips, stories, and artist context from the electric guitar timeline.</p>
+    </header>
+
+    <main>
+        <section class="listen-intro">
+            <h2>Audio Prompts</h2>
+            <p>Use the arrows to flip through prompts. Replace each source path with your real files when you are ready.</p>
+        </section>
+
+        <section class="listen-carousel" aria-label="Audio prompt carousel">
+            <div class="carousel-viewport">
+                <div class="carousel-track" id="carousel-track">
+                    <div class="carousel-slide is-active" data-slide="0" aria-hidden="false">
+                        <article class="audio-card">
+                            <h3>Prompt 01</h3>
+                            <p>Origins and early pickup experiments.</p>
+                            <audio controls preload="none">
+                                <source src="audio/prompt-01.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </article>
+                    </div>
+                    <div class="carousel-slide" data-slide="1" aria-hidden="true">
+                        <article class="audio-card">
+                            <h3>Prompt 02</h3>
+                            <p>The Frying Pan and first commercial success.</p>
+                            <audio controls preload="none">
+                                <source src="audio/prompt-02.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </article>
+                    </div>
+                    <div class="carousel-slide" data-slide="2" aria-hidden="true">
+                        <article class="audio-card">
+                            <h3>Prompt 03</h3>
+                            <p>Les Paul, Fender, Gibson, and modern influence.</p>
+                            <audio controls preload="none">
+                                <source src="audio/prompt-03.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-arrow" id="carousel-prev" type="button" aria-label="Previous audio prompt">&#10094;</button>
+                <button class="carousel-arrow" id="carousel-next" type="button" aria-label="Next audio prompt">&#10095;</button>
+            </div>
+        </section>
+
+        <div class="nav-row">
+            <a class="nav-btn" href="index.html">Back to Museum</a>
+            <a class="nav-btn secondary" href="index.html#timeline">Jump to Timeline</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Museum of the Electric Guitar. All rights reserved.</p>
+    </footer>
+
+    <script>
+        (function initAudioCarousel() {
+            const track = document.getElementById("carousel-track");
+            const viewport = track.parentElement;
+            const prevButton = document.getElementById("carousel-prev");
+            const nextButton = document.getElementById("carousel-next");
+            const transitionStyle = "transform 420ms cubic-bezier(0.22, 0.61, 0.36, 1)";
+            const originalSlides = Array.from(track.querySelectorAll(".carousel-slide"));
+
+            if (originalSlides.length < 2) {
+                return;
+            }
+
+            const firstClone = originalSlides[0].cloneNode(true);
+            const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
+            firstClone.classList.add("is-clone");
+            lastClone.classList.add("is-clone");
+            firstClone.setAttribute("data-slide", "0");
+            lastClone.setAttribute("data-slide", String(originalSlides.length - 1));
+            track.insertBefore(lastClone, originalSlides[0]);
+            track.appendChild(firstClone);
+
+            const slides = Array.from(track.querySelectorAll(".carousel-slide"));
+            const audios = Array.from(track.querySelectorAll("audio"));
+            const realSlideCount = originalSlides.length;
+            let currentTrackIndex = 1;
+            let touchStartX = 0;
+            let pendingDirection = "next";
+            let isTransitioning = false;
+
+            track.style.transition = transitionStyle;
+
+            function pauseAllAudio() {
+                audios.forEach((audio) => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                });
+            }
+
+            function updateSlideClasses(animateFlip = true) {
+                slides.forEach((slide, index) => {
+                    const isActive = index === currentTrackIndex;
+                    const isPrev = index === currentTrackIndex - 1;
+                    const isNext = index === currentTrackIndex + 1;
+
+                    slide.classList.toggle("is-active", isActive);
+                    slide.classList.toggle("is-prev", isPrev);
+                    slide.classList.toggle("is-next", isNext);
+                    slide.setAttribute("aria-hidden", String(!isActive));
+
+                    if (isActive && animateFlip) {
+                        slide.classList.remove("flip-from-next", "flip-from-prev");
+                        void slide.offsetWidth;
+                        slide.classList.add(pendingDirection === "prev" ? "flip-from-prev" : "flip-from-next");
+                    } else {
+                        slide.classList.remove("flip-from-next", "flip-from-prev");
+                    }
+                });
+            }
+
+            function setTrackPosition(animate = true, animateFlip = true) {
+                if (!animate) {
+                    track.style.transition = "none";
+                }
+
+                const activeSlide = slides[currentTrackIndex];
+                const activeCenter = activeSlide.offsetLeft + (activeSlide.offsetWidth / 2);
+                const viewportCenter = viewport.clientWidth / 2;
+                const offset = viewportCenter - activeCenter;
+                track.style.transform = `translateX(${offset}px)`;
+                updateSlideClasses(animateFlip);
+
+                if (!animate) {
+                    requestAnimationFrame(() => {
+                        track.style.transition = transitionStyle;
+                    });
+                }
+            }
+
+            function goToRelative(delta) {
+                if (isTransitioning) {
+                    return;
+                }
+
+                pendingDirection = delta > 0 ? "next" : "prev";
+                isTransitioning = true;
+                currentTrackIndex += delta;
+                pauseAllAudio();
+                setTrackPosition(true, true);
+            }
+
+            prevButton.addEventListener("click", () => goToRelative(-1));
+            nextButton.addEventListener("click", () => goToRelative(1));
+
+            track.addEventListener("transitionend", (event) => {
+                if (event.propertyName !== "transform") {
+                    return;
+                }
+
+                if (currentTrackIndex === 0) {
+                    currentTrackIndex = realSlideCount;
+                    setTrackPosition(false, false);
+                } else if (currentTrackIndex === slides.length - 1) {
+                    currentTrackIndex = 1;
+                    setTrackPosition(false, false);
+                }
+
+                isTransitioning = false;
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "ArrowLeft") {
+                    goToRelative(-1);
+                }
+
+                if (event.key === "ArrowRight") {
+                    goToRelative(1);
+                }
+            });
+
+            track.addEventListener("touchstart", (event) => {
+                touchStartX = event.changedTouches[0].screenX;
+            }, { passive: true });
+
+            track.addEventListener("touchend", (event) => {
+                const delta = event.changedTouches[0].screenX - touchStartX;
+                if (Math.abs(delta) < 45) {
+                    return;
+                }
+
+                if (delta > 0) {
+                    goToRelative(-1);
+                } else {
+                    goToRelative(1);
+                }
+            }, { passive: true });
+
+            window.addEventListener("resize", () => setTrackPosition(false, false));
+
+            setTrackPosition(false, false);
+        })();
+    </script>
+</body>
+</html>
