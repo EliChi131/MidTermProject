@@ -53,7 +53,7 @@
             box-shadow: 0 6px 16px rgba(102, 132, 165, 0.35);
             z-index: 2;
         }
-        .timeline-btn:focus-visible {
+        .timeline-btn.clicked-outline {
             box-shadow: 0 0 0 3px #f2f7ff, 0 0 0 6px #90b7dc;
         }
         .timeline-btn:hover {
@@ -251,6 +251,31 @@
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 1rem;
+        }
+        .header-chevron {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 14px;
+            margin-top: 0.45rem;
+            opacity: 0.9;
+            transition: transform 0.26s ease, opacity 0.2s ease;
+            transform-origin: center;
+            pointer-events: none;
+        }
+        .header-chevron::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-right: 2px solid rgba(247, 251, 255, 0.95);
+            border-bottom: 2px solid rgba(247, 251, 255, 0.95);
+            transform: rotate(45deg);
+            display: block;
+        }
+        header:hover .header-chevron,
+        header:focus-within .header-chevron {
+            transform: rotate(180deg);
+            opacity: 1;
         }
         .header-actions {
             display: flex;
@@ -544,6 +569,7 @@
                 <a class="header-action-btn" id="header-listen-btn" href="listen.html">Listen</a>
                 <button class="header-action-btn" type="button">Button</button>
             </div>
+            <div class="header-chevron" aria-hidden="true"></div>
         </div>
     </header>
     <main>
@@ -692,6 +718,7 @@
             overlay.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = document.body.classList.contains('welcome-active') ? 'hidden' : '';
             buttons.forEach(b => b.setAttribute('aria-expanded', 'false'));
+            setClickedOutline(null);
             if (overlayTriggerButton) {
                 overlayTriggerButton.focus();
             }
@@ -741,6 +768,14 @@
                 selectedEra = era;
             }
         }
+
+        function setClickedOutline(activeButton) {
+            buttons.forEach(b => b.classList.remove('clicked-outline'));
+            if (activeButton) {
+                activeButton.classList.add('clicked-outline');
+            }
+        }
+
         // Set up hover events
         buttons.forEach(btn => {
             btn.addEventListener('mouseenter', function() {
@@ -750,6 +785,7 @@
             btn.addEventListener('click', function() {
                 const era = btn.getAttribute('data-era');
                 showEra(era);
+                setClickedOutline(btn);
                 openOverlay(era, btn);
             });
         });
