@@ -8,13 +8,49 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
+        .timeline-flex-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 1.7rem;
+            margin-bottom: 1.45rem;
+        }
+        .timeline-flex-row.reverse {
+            flex-direction: row-reverse;
+        }
+        .timeline-block-text {
+            flex: 1 1 0;
+            min-width: 0;
+            text-align: left;
+        }
+        .timeline-flex-row img {
+            max-width: 280px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
         :root {
             --font-display: "Fraunces", "Times New Roman", serif;
             --font-ui: "Manrope", "Segoe UI", sans-serif;
+            --bg-page: #dfeaf6;
+            --surface: #dde9f6;
+            --surface-elevated: #eaf2fb;
             --text-strong: #21374d;
             --text-body: #3d556d;
             --text-muted: #5b7690;
             --label: #6d8ca9;
+            --accent: #88a8c6;
+            --accent-strong: #7698b8;
+            --border-soft: #aec5da;
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 18px;
+            --shadow-sm: 0 4px 14px rgba(108, 138, 169, 0.22);
+            --shadow-lg: 0 12px 32px rgba(86, 113, 142, 0.24);
+            --motion-fast: 180ms;
+            --motion-med: 320ms;
+            --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .vertical-timeline-nav {
             display: flex;
@@ -26,7 +62,7 @@
             gap: 18px;
         }
         .timeline-btn {
-            background: linear-gradient(90deg, #c9e3ff 0%, #a9cdef 100%);
+            background: linear-gradient(90deg, #b9d3ec 0%, #98bddf 100%);
             color: #2f4a66;
             border: none;
             border-radius: 16px;
@@ -34,12 +70,12 @@
             height: 64px;
             font-family: var(--font-ui);
             font-weight: 800;
-            font-size: 0.95rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            box-shadow: 0 2px 10px rgba(116, 151, 185, 0.28);
+            font-size: 0.98rem;
+            letter-spacing: 0.03em;
+            text-transform: none;
+            box-shadow: var(--shadow-sm);
             cursor: pointer;
-            transition: background 0.2s, box-shadow 0.2s;
+            transition: background var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard), transform var(--motion-fast) var(--ease-standard);
             outline: none;
             text-align: center;
             white-space: nowrap;
@@ -48,26 +84,26 @@
             justify-content: center;
         }
         .timeline-btn.selected {
-            background: linear-gradient(90deg, #b4d6f6 0%, #c4e7ff 100%);
+            background: linear-gradient(90deg, #a6c2dd 0%, #b6d4ee 100%);
             color: #2a465f;
-            box-shadow: 0 6px 16px rgba(102, 132, 165, 0.35);
+            box-shadow: var(--shadow-lg);
             z-index: 2;
         }
         .timeline-btn.clicked-outline {
-            box-shadow: 0 0 0 3px #f2f7ff, 0 0 0 6px #90b7dc;
+            box-shadow: 0 0 0 3px #f2f7ff, 0 0 0 6px #8db4d8;
         }
         .timeline-btn:hover {
-            background: linear-gradient(90deg, #d9ecff 0%, #b6d7f4 100%);
+            background: linear-gradient(90deg, #c5daed 0%, #a7c5e2 100%);
             color: #2f4a66;
         }
         body {
             font-family: var(--font-ui);
-            font-size: 18px;
-            line-height: 1.68;
+            font-size: 17.5px;
+            line-height: 1.72;
             letter-spacing: 0.008em;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
-            background: #f2f7ff;
+            background: var(--bg-page);
             color: var(--text-body);
             margin: 0;
         }
@@ -86,9 +122,9 @@
             justify-content: center;
             padding: 1rem;
             background:
-                radial-gradient(140% 110% at 10% 8%, #f4fbff 0%, rgba(244, 251, 255, 0) 62%),
-                radial-gradient(130% 105% at 92% 16%, #d9ecfb 0%, rgba(217, 236, 251, 0) 55%),
-                linear-gradient(165deg, #dceefe 0%, #c4dbf1 46%, #a8c3e0 100%);
+                radial-gradient(140% 110% at 10% 8%, #e7f1fb 0%, rgba(231, 241, 251, 0) 62%),
+                radial-gradient(130% 105% at 92% 16%, #c7dced 0%, rgba(199, 220, 237, 0) 55%),
+                linear-gradient(165deg, #cfe1f2 0%, #b2c9df 46%, #91acc9 100%);
             transition: opacity 0.35s ease;
             overflow: hidden;
             isolation: isolate;
@@ -146,10 +182,10 @@
             width: 100%;
             text-align: left;
             background: rgba(248, 252, 255, 0.95);
-            border: 2px solid #b7d3ea;
-            border-radius: 16px;
-            box-shadow: 0 12px 35px rgba(95, 121, 148, 0.26);
-            padding: 1.4rem;
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 1.65rem;
             overflow: hidden;
             position: relative;
             z-index: 1;
@@ -225,19 +261,19 @@
             font-family: var(--font-ui);
             font-size: 0.9rem;
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            text-transform: none;
+            letter-spacing: 0.03em;
             padding: 0.85rem 1.5rem;
             cursor: pointer;
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
-            box-shadow: 0 3px 10px rgba(116, 151, 185, 0.3);
+            transition: transform var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard);
+            box-shadow: var(--shadow-sm);
         }
         .enter-museum-btn:hover,
         .enter-museum-btn:focus {
             transform: translateY(-1px);
             box-shadow: 0 7px 18px rgba(102, 132, 165, 0.35);
         }
-        header, footer { background: #9fbfdd; color: #f7fbff; text-align: center; padding: 1.5rem 0; }
+        header, footer { background: var(--accent); color: #f7fbff; text-align: center; padding: 1.5rem 0; }
         header {
             transition: padding 0.26s ease, box-shadow 0.26s ease;
             overflow: hidden;
@@ -307,9 +343,9 @@
             align-items: center;
             justify-content: center;
             font-family: var(--font-ui);
-            font-size: 0.74rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+            text-transform: none;
             font-weight: 800;
             padding: 0.45rem 0.95rem;
             cursor: pointer;
@@ -321,7 +357,7 @@
             border-color: rgba(247, 251, 255, 0.95);
             outline: none;
         }
-        main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; position: relative; }
+        main { max-width: 1080px; margin: 2.4rem auto; padding: 0 1.2rem; position: relative; }
         h1 {
             margin: 0 0 0.35rem 0;
             font-family: var(--font-display);
@@ -341,14 +377,15 @@
         }
         h2 {
             color: #5f7fa0;
-            border-bottom: 2px solid #bfd7ec;
-            padding-bottom: 0.3rem;
+            border-bottom: 2px solid var(--border-soft);
+            padding-bottom: 0.45rem;
             font-family: var(--font-display);
             font-weight: 650;
             font-size: clamp(1.7rem, 2.8vw, 2.35rem);
             line-height: 1.15;
             letter-spacing: -0.01em;
             text-wrap: balance;
+            margin-bottom: 1.6rem;
         }
         .timeline-container {
             display: flex;
@@ -385,40 +422,40 @@
             justify-content: center;
         }
         .timeline-block {
-            background: #ebf4ff;
-            border-radius: 10px;
-            box-shadow: 0 4px 14px rgba(116, 151, 185, 0.24);
-            padding: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 1.75rem;
             position: absolute;
             left: 0;
             width: 100%;
             text-align: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
             z-index: 1;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(calc(-50% + 12px));
+            transition: opacity var(--motion-med) var(--ease-standard), transform var(--motion-med) var(--ease-standard);
         }
         .timeline-block.active {
-              opacity: 1;
-              pointer-events: auto;
-              z-index: 2;
-              position: relative;
-              top: 0;
-              transform: none;
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 2;
+            top: 50%;
+            transform: translateY(-50%);
         }
         .timeline-block img {
             display: block;
             margin: 1rem auto;
             max-width: 320px;
             width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(116, 151, 185, 0.24);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
         }
         .timeline-block h3 {
             margin-top: 0;
-            color: #587594;
+            color: var(--text-strong);
             font-family: var(--font-display);
             font-size: clamp(1.35rem, 2.2vw, 1.85rem);
             font-weight: 650;
@@ -429,9 +466,9 @@
         .timeline-block p {
             color: var(--text-body);
             font-size: 1rem;
-            line-height: 1.72;
-            max-width: 68ch;
-            margin: 0.75rem auto 0;
+            line-height: 1.7;
+            max-width: 64ch;
+            margin: 0.65rem auto 0;
         }
         .timeline-block div[style*="font-weight:bold"] {
             font-family: var(--font-ui);
@@ -445,7 +482,7 @@
         .era-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(83, 108, 134, 0.5);
+            background: rgba(54, 80, 108, 0.48);
             display: none;
             align-items: center;
             justify-content: center;
@@ -456,16 +493,24 @@
             display: flex;
         }
         .era-overlay-panel {
-            background: #f6faff;
+            background: var(--surface-elevated);
             color: #364c63;
             width: min(760px, 100%);
+            max-width: 480px;
             max-height: 86vh;
             overflow-y: auto;
-            border-radius: 14px;
-            border: 2px solid #bfd7ec;
-            box-shadow: 0 14px 36px rgba(83, 108, 134, 0.3);
-            padding: 1.25rem 1.25rem 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem 2.15rem;
             position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity var(--motion-med) var(--ease-standard), transform var(--motion-med) var(--ease-standard);
+        }
+        .era-overlay.open .era-overlay-panel {
+            opacity: 1;
+            transform: translateY(0);
         }
         .era-overlay-close {
             position: absolute;
@@ -565,9 +610,7 @@
             <h1>Museum of the Electric Guitar</h1>
             <p>Explore the history, innovation, and cultural impact of the electric guitar.</p>
             <div class="header-actions" aria-label="Header quick actions">
-                <button class="header-action-btn" id="header-home-btn" type="button">Museum</button>
                 <a class="header-action-btn" id="header-listen-btn" href="listen.html">Listen</a>
-                <button class="header-action-btn" type="button">Button</button>
             </div>
             <div class="header-chevron" aria-hidden="true"></div>
         </div>
@@ -595,45 +638,92 @@
 
                 <div class="timeline-blocks" style="flex: 1;">
                     <div class="timeline-block" data-era="0">
-                        <h3>Origins: The Need for Volume (1920s–1930s)</h3>
-                        <img src="images/jazzband.jpg" alt="Jazz Band performing with acoustic guitars">
-                        <p>Acoustic guitars struggled to be heard in jazz and big‑band settings. Early inventors experimented with pickups and amplification, setting the stage for engineering innovation driven by musical necessity.</p>
+                        <div class="timeline-flex-row">
+                            <img src="images/jazzband.jpg" alt="Jazz Band performing with acoustic guitars">
+                            <div class="timeline-block-text">
+                                <h3>Origins: The Need for Volume (1920s–1930s)</h3>
+                                <p>Acoustic guitars struggled to be heard in jazz and big‑band settings. Early inventors experimented with pickups and amplification, setting the stage for engineering innovation driven by musical necessity.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="timeline-block" data-era="1">
-                        <h3>First Breakthrough: The Rickenbacker “Frying Pan” (1931–1932)</h3>
-                        <img src="images/fryingpan.jpg" alt="Rickenbacker Frying Pan">
-                        <p>The first commercially successful electric guitar, featuring a horseshoe‑style pickup. Marks the beginning of the electric guitar as a real instrument.</p>
+                        <div class="timeline-flex-row">
+                            <img src="images/fryingpan.jpg" alt="Rickenbacker Frying Pan">
+                            <div class="timeline-block-text">
+                                <h3>First Breakthrough: The Rickenbacker “Frying Pan” (1931–1932)</h3>
+                                <p>The first commercially successful electric guitar, featuring a horseshoe‑style pickup. Marks the beginning of the electric guitar as a real instrument.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="timeline-block" data-era="2">
-                        <div style="font-weight:bold; color:#5f7fa0; margin-bottom:0.5rem;">Early 1940s</div>
-                        <h3>Les Paul’s “Log” Prototype</h3>
-                        <img src="images/lespaul_log.jpg" alt="Les Paul's Log Prototype">
-                        <p>Les Paul’s “Log” (early 1940s): a 4x4 piece of wood with pickups attached, proved that a solid body reduced feedback and increased sustain. This innovation paved the way for the modern electric guitar.</p>
+                        <div class="timeline-flex-row">
+                            <img src="images/lespaul_log.jpg" alt="Les Paul's Log Prototype">
+                            <div class="timeline-block-text">
+                                <div style="font-weight:bold; color:#5f7fa0; margin-bottom:0.5rem;">Early 1940s</div>
+                                <h3>Les Paul’s “Log” Prototype</h3>
+                                <p>Les Paul’s “Log” (early 1940s): a 4x4 piece of wood with pickups attached, proved that a solid body reduced feedback and increased sustain. This innovation paved the way for the modern electric guitar.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="timeline-block" data-era="3">
-                        <div style="font-weight:bold; color:#5f7fa0; margin-bottom:0.5rem;">1950s</div>
-                        <h3>Fender Broadcaster/Telecaster & Early Fender Ads</h3>
-                        <img src="images/fender_ad.jpg" alt="Early Fender Advertisement">
-                        <p>Fender Broadcaster/Telecaster (1950): first mass‑produced solid‑body electric guitar, simple and durable.<br>
-                        Gibson Les Paul (1952): combined craftsmanship with powerful tone, became one of the most iconic guitars in history.<br>
-                        Early Fender advertisements and catalogs show the shift toward mass production and how the electric guitar was marketed to working musicians. This era establishes the core designs still used today.</p>
+                        <div class="timeline-flex-row">
+                            <img src="images/fender_ad.jpg" alt="Early Fender Advertisement">
+                            <div class="timeline-block-text">
+                                <div style="font-weight:bold; color:#5f7fa0; margin-bottom:0.5rem;">1950s</div>
+                                <h3>Fender Broadcaster/Telecaster & Early Fender Ads</h3>
+                                <p>Fender Broadcaster/Telecaster (1950): first mass‑produced solid‑body electric guitar, simple and durable.<br>
+                                Gibson Les Paul (1952): combined craftsmanship with powerful tone, became one of the most iconic guitars in history.<br>
+                                Early Fender advertisements and catalogs show the shift toward mass production and how the electric guitar was marketed to working musicians. This era establishes the core designs still used today.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-flex-row">
+                            <div class="timeline-block-text">
+                                <h3>The Stratocaster Arrives</h3>
+                                <p>Fender Stratocaster (1954): introduced a contoured body, three single-coil pickups, and a synchronized tremolo system. Its versatile sound and ergonomic design made it a defining guitar for blues, rock, surf, and pop, and it remains one of the most influential electric guitars ever made.</p>
+                            </div>
+                            <img src="images/stratocaster.jpg" alt="Fender Stratocaster">
+                        </div>
                     </div>
                     <div class="timeline-block" data-era="4">
-                        <h3>Cultural Explosion and Iconic Players (1960s–1980s)</h3>
-                        <img src="images/woodstock.jpg" alt="Hendrix at Woodstock">
-                        <p>The electric guitar becomes a symbol of identity, rebellion, and creativity. Influential figures: Jimi Hendrix, Eric Clapton, Jimmy Page, Jeff Beck, Eddie Van Halen. The guitar becomes central to rock, metal, punk, and pop. Instruments like the Stratocaster, SG, and Les Paul become cultural icons.</p>
+                        <div class="timeline-flex-row">
+                            <img src="images/woodstock.jpg" alt="Hendrix at Woodstock">
+                            <div class="timeline-block-text">
+                                <h3>Cultural Explosion and Iconic Players (1960s–1980s)</h3>
+                                <p>The electric guitar becomes a symbol of identity, rebellion, and creativity. Influential figures: Jimi Hendrix, Eric Clapton, Jimmy Page, Jeff Beck, Eddie Van Halen. The guitar becomes central to rock, metal, punk, and pop. Instruments like the Stratocaster, SG, and Les Paul become cultural icons.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="timeline-block" data-era="5">
-                        <h3>Technology Expands the Sound (1960s–present)</h3>
-                        <img src="images/humbucker.jpg" alt="Gibson PAF Humbucker">
-                        <img src="images/fuzzface.jpg" alt="Fuzz Face Pedal">
-                        <img src="images/marshall.jpg" alt="Marshall Plexi Stack">
-                        <p>Key innovations: single‑coil vs humbucker pickups, distortion, fuzz, overdrive, effects pedals (wah, delay, chorus, flanger), amplifier evolution (tubes → solid‑state → modeling), recording and live sound improvements. Each innovation opened new creative possibilities for players.</p>
+                        <div class="timeline-flex-row">
+                            <img src="images/humbucker.jpg" alt="Gibson PAF Humbucker">
+                            <div class="timeline-block-text">
+                                <h3>Technology Expands the Sound (1960s–present)</h3>
+                                <p>Key innovation: single‑coil vs humbucker pickups. This era saw the development of the humbucker, which reduced noise and increased output, changing the sound of rock and jazz.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-flex-row">
+                            <div class="timeline-block-text">
+                                <h3>Effects Pedals Revolution</h3>
+                                <p>Distortion, fuzz, overdrive, and effects pedals (wah, delay, chorus, flanger) allowed guitarists to create new sounds and textures, expanding creative possibilities.</p>
+                            </div>
+                            <img src="images/fuzzface.jpg" alt="Fuzz Face Pedal">
+                        </div>
+                        <div class="timeline-flex-row">
+                            <img src="images/marshall.jpg" alt="Marshall Plexi Stack">
+                            <div class="timeline-block-text">
+                                <h3>Amplifier Evolution</h3>
+                                <p>Amplifier technology evolved from tubes to solid-state to digital modeling, improving recording and live sound. Each innovation opened new creative possibilities for players.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="timeline-block" data-era="6">
-                        <h3>Modern Era: Customization, Digital Tech, and Cultural Legacy (1990s–present)</h3>
-                        <img src="images/pod.jpg" alt="Line 6 POD">
-                        <p>Rise of boutique builders and DIY modding. Digital modeling (Line 6, Kemper, Helix, Neural DSP) reshapes tone creation. The electric guitar remains a symbol of creativity and personal expression. Despite digital music trends, the guitar maintains cultural relevance in rock, pop, indie, and beyond.</p>
+                        <div class="timeline-flex-row">
+                            <img src="images/pod.jpg" alt="Line 6 POD">
+                            <div class="timeline-block-text">
+                                <h3>Modern Era: Customization, Digital Tech, and Cultural Legacy (1990s–present)</h3>
+                                <p>Rise of boutique builders and DIY modding. Digital modeling (Line 6, Kemper, Helix, Neural DSP) reshapes tone creation. The electric guitar remains a symbol of creativity and personal expression. Despite digital music trends, the guitar maintains cultural relevance in rock, pop, indie, and beyond.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -724,19 +814,25 @@
             }
         }
 
-        function enterMuseum() {
+        function enterMuseum(options = {}) {
+            const { immediate = false, skipFocus = false } = options;
             if (!welcomeScreen) {
                 return;
             }
-            welcomeScreen.classList.add('hidden');
             document.body.classList.remove('welcome-active');
             document.body.style.overflow = '';
-            if (buttons.length > 0) {
+            if (immediate) {
+                welcomeScreen.classList.add('hidden');
+                welcomeScreen.setAttribute('aria-hidden', 'true');
+            } else {
+                welcomeScreen.classList.add('hidden');
+                window.setTimeout(() => {
+                    welcomeScreen.setAttribute('aria-hidden', 'true');
+                }, 350);
+            }
+            if (!skipFocus && buttons.length > 0) {
                 buttons[0].focus();
             }
-            window.setTimeout(() => {
-                welcomeScreen.setAttribute('aria-hidden', 'true');
-            }, 350);
         }
 
         function scrollToSection(sectionId) {
@@ -822,7 +918,9 @@
 
         if (enterMuseumBtn) {
             enterMuseumBtn.addEventListener('click', enterMuseum);
-            enterMuseumBtn.focus();
+            if (window.location.hash !== '#timeline') {
+                enterMuseumBtn.focus();
+            }
         }
 
         if (headerHomeBtn) {
@@ -832,6 +930,10 @@
                 }
                 scrollToSection('timeline');
             });
+        }
+
+        if (window.location.hash === '#timeline' && document.body.classList.contains('welcome-active')) {
+            enterMuseum({ immediate: true, skipFocus: true });
         }
 
     });
