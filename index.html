@@ -23,6 +23,11 @@
             flex: 1 1 0;
             min-width: 0;
             text-align: left;
+            background: rgba(20, 24, 30, 0.46);
+            border: 1px solid rgba(181, 139, 69, 0.45);
+            border-radius: 12px;
+            padding: 1rem 1.1rem;
+            box-shadow: inset 0 1px 0 rgba(255, 237, 206, 0.08), 0 5px 12px rgba(0, 0, 0, 0.2);
         }
         .timeline-flex-row img {
             max-width: 280px;
@@ -33,24 +38,25 @@
         :root {
             --font-display: "Fraunces", "Times New Roman", serif;
             --font-ui: "Manrope", "Segoe UI", sans-serif;
-            --bg-page: #dfeaf6;
-            --surface: #dde9f6;
-            --surface-elevated: #eaf2fb;
-            --text-strong: #21374d;
-            --text-body: #3d556d;
-            --text-muted: #5b7690;
-            --label: #6d8ca9;
-            --accent: #88a8c6;
-            --accent-strong: #7698b8;
-            --border-soft: #aec5da;
+            --bg-page: #1f2328;
+            --surface: #2b3139;
+            --surface-elevated: #353d47;
+            --text-strong: #f0e7d8;
+            --text-body: #d7cdbf;
+            --text-muted: #b8ad9d;
+            --label: #d2b06c;
+            --accent: #12161b;
+            --accent-strong: #0d1014;
+            --border-soft: #8f7446;
             --radius-sm: 10px;
             --radius-md: 14px;
             --radius-lg: 18px;
-            --shadow-sm: 0 4px 14px rgba(108, 138, 169, 0.22);
-            --shadow-lg: 0 12px 32px rgba(86, 113, 142, 0.24);
+            --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.28);
+            --shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.35);
             --motion-fast: 180ms;
             --motion-med: 320ms;
             --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
+            --box-contrast-border: #b58b45;
         }
         .vertical-timeline-nav {
             display: flex;
@@ -62,8 +68,8 @@
             gap: 18px;
         }
         .timeline-btn {
-            background: linear-gradient(90deg, #b9d3ec 0%, #98bddf 100%);
-            color: #2f4a66;
+            background: linear-gradient(90deg, #343c46 0%, #2a3038 100%);
+            color: #e8ddcb;
             border: none;
             border-radius: 16px;
             width: 200px;
@@ -84,17 +90,17 @@
             justify-content: center;
         }
         .timeline-btn.selected {
-            background: linear-gradient(90deg, #a6c2dd 0%, #b6d4ee 100%);
-            color: #2a465f;
+            background: linear-gradient(90deg, #3f3321 0%, #b58b45 100%);
+            color: #fff5e3;
             box-shadow: var(--shadow-lg);
             z-index: 2;
         }
         .timeline-btn.clicked-outline {
-            box-shadow: 0 0 0 3px #f2f7ff, 0 0 0 6px #8db4d8;
+            box-shadow: 0 0 0 3px rgba(255, 248, 236, 0.4), 0 0 0 6px rgba(181, 139, 69, 0.8);
         }
         .timeline-btn:hover {
-            background: linear-gradient(90deg, #c5daed 0%, #a7c5e2 100%);
-            color: #2f4a66;
+            background: linear-gradient(90deg, #40372d 0%, #3a3229 100%);
+            color: #f4e9d8;
         }
         body {
             font-family: var(--font-ui);
@@ -103,7 +109,65 @@
             letter-spacing: 0.008em;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
-            background: var(--bg-page);
+            background-color: var(--bg-page);
+            background-image:
+                radial-gradient(circle at 18% 14%, rgba(240, 225, 196, 0.08) 0%, rgba(240, 225, 196, 0) 48%),
+                radial-gradient(circle at 82% 78%, rgba(181, 139, 69, 0.07) 0%, rgba(181, 139, 69, 0) 46%),
+                linear-gradient(
+                    124deg,
+                    rgba(255, 243, 217, 0.08) 0%,
+                    rgba(255, 243, 217, 0) 18%,
+                    rgba(0, 0, 0, 0.05) 25%,
+                    rgba(255, 243, 217, 0.06) 34%,
+                    rgba(255, 243, 217, 0) 52%,
+                    rgba(0, 0, 0, 0.04) 65%,
+                    rgba(255, 243, 217, 0.04) 78%,
+                    rgba(255, 243, 217, 0) 100%
+                ),
+                linear-gradient(
+                    -132deg,
+                    rgba(255, 235, 198, 0.05) 0%,
+                    rgba(255, 235, 198, 0) 22%,
+                    rgba(0, 0, 0, 0.045) 31%,
+                    rgba(255, 235, 198, 0.05) 42%,
+                    rgba(255, 235, 198, 0) 61%,
+                    rgba(0, 0, 0, 0.04) 74%,
+                    rgba(255, 235, 198, 0.03) 86%,
+                    rgba(255, 235, 198, 0) 100%
+                ),
+                repeating-linear-gradient(
+                    141deg,
+                    rgba(0, 0, 0, 0) 0,
+                    rgba(0, 0, 0, 0) 120px,
+                    rgba(250, 235, 205, 0.04) 120px,
+                    rgba(250, 235, 205, 0.04) 123px,
+                    rgba(0, 0, 0, 0) 123px,
+                    rgba(0, 0, 0, 0) 260px
+                ),
+                repeating-linear-gradient(
+                    36deg,
+                    rgba(0, 0, 0, 0) 0,
+                    rgba(0, 0, 0, 0) 105px,
+                    rgba(0, 0, 0, 0.04) 105px,
+                    rgba(0, 0, 0, 0.04) 108px,
+                    rgba(0, 0, 0, 0) 108px,
+                    rgba(0, 0, 0, 0) 230px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(248, 234, 206, 0.035) 0,
+                    rgba(248, 234, 206, 0.035) 1px,
+                    rgba(0, 0, 0, 0) 1px,
+                    rgba(0, 0, 0, 0) 3px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(0, 0, 0, 0.03) 0,
+                    rgba(0, 0, 0, 0.03) 1px,
+                    rgba(0, 0, 0, 0) 1px,
+                    rgba(0, 0, 0, 0) 4px
+                );
+            background-attachment: fixed;
             color: var(--text-body);
             margin: 0;
         }
@@ -122,9 +186,9 @@
             justify-content: center;
             padding: 1rem;
             background:
-                radial-gradient(140% 110% at 10% 8%, #e7f1fb 0%, rgba(231, 241, 251, 0) 62%),
-                radial-gradient(130% 105% at 92% 16%, #c7dced 0%, rgba(199, 220, 237, 0) 55%),
-                linear-gradient(165deg, #cfe1f2 0%, #b2c9df 46%, #91acc9 100%);
+                radial-gradient(140% 110% at 10% 8%, rgba(196, 157, 88, 0.14) 0%, rgba(196, 157, 88, 0) 62%),
+                radial-gradient(130% 105% at 92% 16%, rgba(255, 245, 228, 0.08) 0%, rgba(255, 245, 228, 0) 55%),
+                linear-gradient(165deg, #171b20 0%, #242a33 46%, #2e3640 100%);
             transition: opacity 0.35s ease;
             overflow: hidden;
             isolation: isolate;
@@ -181,7 +245,7 @@
             max-width: 920px;
             width: 100%;
             text-align: left;
-            background: rgba(248, 252, 255, 0.95);
+            background: rgba(40, 46, 55, 0.94);
             border: 1px solid var(--border-soft);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-lg);
@@ -250,14 +314,14 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             font-weight: 700;
-            background: rgba(247, 252, 255, 0.8);
-            color: #496683;
+            background: rgba(181, 139, 69, 0.28);
+            color: #f0e3cb;
         }
         .enter-museum-btn {
             border: none;
             border-radius: 999px;
-            background: linear-gradient(90deg, #c3e0fb 0%, #a9ccee 100%);
-            color: #2f4a66;
+            background: linear-gradient(90deg, #4a3c27 0%, #b58b45 100%);
+            color: #fff6e5;
             font-family: var(--font-ui);
             font-size: 0.9rem;
             font-weight: 800;
@@ -337,7 +401,7 @@
             border: 1px solid rgba(247, 251, 255, 0.7);
             border-radius: 999px;
             background: rgba(247, 251, 255, 0.2);
-            color: #f7fbff;
+            color: #f2e8d8;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -353,8 +417,8 @@
         }
         .header-action-btn:hover,
         .header-action-btn:focus-visible {
-            background: rgba(247, 251, 255, 0.33);
-            border-color: rgba(247, 251, 255, 0.95);
+            background: rgba(181, 139, 69, 0.26);
+            border-color: rgba(223, 188, 125, 0.9);
             outline: none;
         }
         main { max-width: 1080px; margin: 2.4rem auto; padding: 0 1.2rem; position: relative; }
@@ -373,10 +437,10 @@
             font-weight: 500;
             font-size: clamp(0.96rem, 1.7vw, 1.1rem);
             letter-spacing: 0.01em;
-            color: #eff6ff;
+            color: #e5d8c2;
         }
         h2 {
-            color: #5f7fa0;
+            color: #f0e7d8;
             border-bottom: 2px solid var(--border-soft);
             padding-bottom: 0.45rem;
             font-family: var(--font-display);
@@ -407,7 +471,7 @@
             top: 0;
             width: 6px;
             height: 100%;
-            background: linear-gradient(to bottom, #d3ebff 0%, #a8c9e7 100%);
+            background: linear-gradient(to bottom, #c7a96e 0%, #7d6438 100%);
             border-radius: 3px;
             transform: translateX(-50%);
         }
@@ -422,8 +486,17 @@
             justify-content: center;
         }
         .timeline-block {
-            background: var(--surface);
-            border: 1px solid var(--border-soft);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 100%),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(255, 255, 255, 0.1) 0,
+                    rgba(255, 255, 255, 0.1) 2px,
+                    rgba(0, 0, 0, 0) 2px,
+                    rgba(0, 0, 0, 0) 11px
+                ),
+                #2f353d;
+            border: 1px solid var(--box-contrast-border);
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-sm);
             padding: 1.75rem;
@@ -482,25 +555,42 @@
         .era-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(54, 80, 108, 0.48);
-            display: none;
+            background: rgba(11, 13, 16, 0.62);
+            display: flex;
             align-items: center;
             justify-content: center;
             padding: 1rem;
             z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity var(--motion-med) var(--ease-standard);
         }
         .era-overlay.open {
-            display: flex;
+            visibility: visible;
+        }
+        .era-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
         }
         .era-overlay-panel {
-            background: var(--surface-elevated);
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.04) 100%),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(255, 255, 255, 0.09) 0,
+                    rgba(255, 255, 255, 0.09) 2px,
+                    rgba(0, 0, 0, 0) 2px,
+                    rgba(0, 0, 0, 0) 12px
+                ),
+                var(--surface-elevated);
             color: #364c63;
             width: min(760px, 100%);
             max-width: 480px;
             max-height: 86vh;
             overflow-y: auto;
             border-radius: var(--radius-md);
-            border: 1px solid var(--border-soft);
+            border: 1px solid var(--box-contrast-border);
             box-shadow: var(--shadow-lg);
             padding: 2rem 2.15rem;
             position: relative;
@@ -508,7 +598,7 @@
             transform: translateY(40px);
             transition: opacity var(--motion-med) var(--ease-standard), transform var(--motion-med) var(--ease-standard);
         }
-        .era-overlay.open .era-overlay-panel {
+        .era-overlay.visible .era-overlay-panel {
             opacity: 1;
             transform: translateY(0);
         }
@@ -522,13 +612,13 @@
             border-radius: 50%;
             font-size: 1.35rem;
             line-height: 1;
-            background: #a9ccee;
-            color: #2f4a66;
+            background: rgba(181, 139, 69, 0.35);
+            color: #fff0d5;
             cursor: pointer;
         }
         .era-overlay-panel h3 {
             margin: 0 2.4rem 0.7rem 0;
-            color: #587594;
+            color: #f0dfbf;
             font-family: var(--font-display);
             font-size: clamp(1.45rem, 2.3vw, 2rem);
             font-weight: 650;
@@ -541,6 +631,7 @@
             line-height: 1.72;
             color: var(--text-body);
             font-size: 1rem;
+            white-space: pre-line;
         }
 
         footer p {
@@ -622,7 +713,7 @@
                 <div style="position: relative; display: flex; flex-direction: row; align-items: flex-start;">
                     <div class="timeline-arrow-indicator" aria-hidden="true" style="position: absolute; left: -38px; top: 0; width: 32px; height: 64px; display: flex; align-items: center; justify-content: center; transition: transform 0.32s cubic-bezier(0.4,0,0.2,1); z-index: 10; pointer-events: none;">
                         <svg width="32" height="32" viewBox="0 0 32 32" style="display:block; margin:auto;" xmlns="http://www.w3.org/2000/svg">
-                            <polygon points="8,6 24,16 8,26" fill="#9fbfdd"/>
+                            <polygon points="8,6 24,16 8,26" fill="#c9a05b"/>
                         </svg>
                     </div>
                     <nav class="vertical-timeline-nav" style="display: flex; flex-direction: column; align-items: center; margin-right: 20px;">
@@ -654,6 +745,13 @@
                                 <p>The first commercially successful electric guitar, featuring a horseshoe‑style pickup. Marks the beginning of the electric guitar as a real instrument.</p>
                             </div>
                         </div>
+                        <div class="timeline-flex-row">
+                            <div class="timeline-block-text">
+                                <h3>Horseshoe Pickup Innovation</h3>
+                                <p>The Frying Pan's distinctive horseshoe pickup wrapped around the strings to produce a stronger electromagnetic signal. This design was a major step in making electric guitars loud, clear, and practical for live performance.</p>
+                            </div>
+                            <img src="images/fppickup.jpg" alt="Rickenbacker Frying Pan horseshoe pickup">
+                        </div>
                     </div>
                     <div class="timeline-block" data-era="2">
                         <div class="timeline-flex-row">
@@ -663,6 +761,13 @@
                                 <h3>Les Paul’s “Log” Prototype</h3>
                                 <p>Les Paul’s “Log” (early 1940s): a 4x4 piece of wood with pickups attached, proved that a solid body reduced feedback and increased sustain. This innovation paved the way for the modern electric guitar.</p>
                             </div>
+                        </div>
+                        <div class="timeline-flex-row">
+                            <div class="timeline-block-text">
+                                <h3>From Prototype to Icon</h3>
+                                <p>The ideas tested in the “Log” later influenced the Gibson Les Paul electric guitar line. What began as a rough engineering experiment evolved into one of the most iconic production models in electric guitar history.</p>
+                            </div>
+                            <img src="images/lespaulelec.jpg" alt="Gibson Les Paul electric guitar model">
                         </div>
                     </div>
                     <div class="timeline-block" data-era="3">
@@ -724,6 +829,13 @@
                                 <p>Rise of boutique builders and DIY modding. Digital modeling (Line 6, Kemper, Helix, Neural DSP) reshapes tone creation. The electric guitar remains a symbol of creativity and personal expression. Despite digital music trends, the guitar maintains cultural relevance in rock, pop, indie, and beyond.</p>
                             </div>
                         </div>
+                        <div class="timeline-flex-row">
+                            <div class="timeline-block-text">
+                                <h3>Modern Multi-FX Workflows</h3>
+                                <p>Units like the Line 6 Helix combine amp modeling, cabinet simulation, and studio-grade effects in a single platform. This all-in-one approach gives players flexible live rigs and consistent direct-recording tones without large traditional pedalboards.</p>
+                            </div>
+                            <img src="images/L6helix.jpg" alt="Line 6 Helix multi-effects pedal">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -752,37 +864,38 @@
         const overlayBody = document.getElementById('era-overlay-body');
         const overlayCloseBtn = document.getElementById('era-overlay-close');
         const headerHomeBtn = document.getElementById('header-home-btn');
+        const blockImages = document.querySelectorAll('.timeline-block img');
         let selectedEra = '0';
         let overlayTriggerButton = null;
 
         const eraDetails = {
             '0': {
                 title: 'Origins: The Need for Volume (1920s-1930s)',
-                body: 'As jazz ensembles grew louder, acoustic guitars could not project enough volume beside brass and percussion. Makers experimented with attaching electromagnetic pickups to strings and routing signals to early amplifiers. This period established the core problem that the electric guitar solved: preserving expressive string playing while achieving stage-ready loudness.'
+                body: 'In the 1920s and 1930s, guitarists in jazz orchestras and dance bands faced a basic acoustic problem: the guitar could not compete with horns, drums, and piano in large ensembles. Players were often present in arrangements but barely audible to audiences.\n\nInventors and musicians began experimenting with contact microphones, magnetic pickups, and early amplification circuits to increase volume without losing string articulation. These experiments were inconsistent at first, but they established the engineering direction that would define the electric guitar.\n\nThis era did not yet produce the fully modern instrument, but it created the central design goal: preserve expressive guitar playing while delivering reliable stage volume.'
             },
             '1': {
                 title: 'First Breakthrough: Rickenbacker Frying Pan (1931-1932)',
-                body: 'The aluminum-bodied Rickenbacker A-22, nicknamed the Frying Pan, became the first commercially successful electric guitar. Its horseshoe pickup captured a clearer and louder signal than prior attempts. Though mostly associated with lap steel performance, it proved electric string instruments could be manufactured and sold at scale.'
+                body: 'The Rickenbacker A-22, commonly called the Frying Pan, is widely recognized as the first commercially successful electric guitar. Its cast aluminum body and lap-steel format were unusual, but its real innovation was electrical: a pickup strong enough for practical amplified performance.\n\nThe horseshoe pickup design, shown in your added pickup image (fppickup), wrapped the magnetic structure around the strings and produced a clear, high-output signal for its time. That made the instrument far more usable in amplified settings than earlier prototypes.\n\nEven though it was designed for steel technique, the Frying Pan proved electric string instruments could be manufactured, marketed, and adopted by working musicians.'
             },
             '2': {
                 title: 'Les Paul and the Log Prototype (Early 1940s)',
-                body: 'Les Paul built the Log to test an important idea: a dense solid center could reduce feedback and improve sustain. Traditional hollow-body builders initially resisted this design, but the experiment changed guitar engineering forever. The concept directly influenced the later rise of mainstream solid-body electric guitars.'
+                body: 'Les Paul built the Log to solve two major issues with amplified hollow guitars: feedback and weak sustain. By placing pickups on a dense central wood beam, he demonstrated that a solid core could remain stable at higher volume while sustaining notes longer.\n\nAt the time, many traditional builders viewed the concept as visually unconventional, but its acoustic logic was powerful. The Log showed that an electric guitar did not need a resonant hollow body to be musically expressive.\n\nYour added Les Paul electric image (lespaulelec) helps connect this experiment to the later production era: many of the Log ideas fed directly into the solid-body language that made the Gibson Les Paul one of the most iconic instruments in guitar history.'
             },
             '3': {
                 title: 'Mass Production Era: Fender and Gibson (1950s)',
-                body: 'Fender introduced efficient bolt-on construction with the Broadcaster/Telecaster, offering durability and easy servicing for working musicians. Gibson responded with the carved-top Les Paul, delivering richer sustain and a premium feel. By the end of the decade, these two design approaches defined much of the electric guitar market and established timeless archetypes.'
+                body: 'The 1950s transformed the electric guitar from a promising invention into a mass-market instrument. Fender pushed modular, repair-friendly manufacturing with the Broadcaster/Telecaster, while Gibson advanced carved-top craftsmanship and sustain-rich set-neck construction in the Les Paul line.\n\nThese were not just product launches; they were competing design philosophies: bolt-on precision and industrial serviceability versus carved luxury and tonal weight. Both approaches succeeded and still define modern guitar categories.\n\nYour added Stratocaster image reflects the next major step in this decade. Introduced in 1954, the Stratocaster brought body contouring, three-pickup versatility, and a synchronized tremolo bridge, becoming a cornerstone of blues, surf, rock, funk, and pop.'
             },
             '4': {
                 title: 'Cultural Explosion and Guitar Heroes (1960s-1980s)',
-                body: 'The electric guitar became a visual and sonic symbol of youth culture, protest, and artistic identity. Players like Hendrix and Van Halen expanded techniques through feedback control, expressive vibrato systems, and high-gain phrasing. During this period, the guitar moved from supporting role to centerpiece across rock, blues, metal, and pop performance.'
+                body: 'From the 1960s onward, the electric guitar became a cultural symbol as much as a musical tool. It was central to youth identity, counterculture, stadium performance, and global pop imagery.\n\nPlayers such as Jimi Hendrix, Eric Clapton, Jimmy Page, Jeff Beck, and Eddie Van Halen redefined technique through feedback control, vibrato systems, harmonic effects, tapping, and high-gain articulation. Their approaches influenced not only lead playing but also recording aesthetics and live stagecraft.\n\nBy the 1980s, the guitar had become a visual and sonic centerpiece across rock, metal, funk, and mainstream pop, with signature models and artist rigs shaping consumer culture and instrument design.'
             },
             '5': {
                 title: 'Technology Expands the Sound (1960s-present)',
-                body: 'Pickup design split into major tonal families: bright single-coils and hum-canceling humbuckers. Effects pedals, amplifier circuits, and studio processing unlocked distortion, modulation, and time-based textures that transformed songwriting. Modern rigs now blend vintage tube response with digital modeling, giving players massive tonal flexibility on stage and in recording.'
+                body: 'This period is defined by rapid expansion of tone-shaping technology. Pickup choices evolved into distinct sound families: bright, articulate single-coils and thicker, hum-rejecting humbuckers, each tied to different genres and playing styles.\n\nEffects then multiplied the guitar vocabulary: fuzz, overdrive, distortion, wah, modulation, delay, and reverb turned the instrument into a full sonic design platform. Combined with amplifier innovation, these tools moved guitar tone from "amp plus guitar" to complete signal-chain architecture.\n\nYour three-image sequence in this section captures that progression well: pickup engineering, pedal-driven texture, and amplifier evolution together created the modern palette that players use in both live and studio contexts.'
             },
             '6': {
                 title: 'Modern Era: Digital, Custom, and Global (1990s-present)',
-                body: 'Boutique builders and aftermarket parts expanded customization, letting players tailor feel, aesthetics, and electronics. Digital ecosystems such as modelers, impulse responses, and plugin suites made professional guitar tones accessible in home studios. Even as genres evolve, the electric guitar remains culturally significant as both instrument and icon.'
+                body: 'Since the 1990s, the electric guitar ecosystem has become both more personalized and more digital. Boutique builders, replacement parts, and DIY modifications enabled players to fine-tune hardware, electronics, and playability for specific artistic goals.\n\nAt the same time, digital modeling platforms changed production workflows. Devices like the Line 6 POD introduced portable modeled tones, and newer systems such as the Line 6 Helix (your added L6helix image) integrated amps, cabinets, effects, routing, and direct recording into unified rigs.\n\nThe result is a hybrid era: traditional instruments paired with software-driven flexibility. Even as music technology evolves, the electric guitar remains culturally durable because it adapts without losing its identity as an expressive, tactile instrument.'
             }
         };
 
@@ -794,6 +907,9 @@
             overlayTitle.textContent = details.title;
             overlayBody.textContent = details.body;
             overlay.classList.add('open');
+            requestAnimationFrame(() => {
+                overlay.classList.add('visible');
+            });
             overlay.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
             overlayTriggerButton = triggerButton || null;
@@ -804,7 +920,10 @@
         }
 
         function closeOverlay() {
-            overlay.classList.remove('open');
+            if (!overlay.classList.contains('open')) {
+                return;
+            }
+            overlay.classList.remove('visible');
             overlay.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = document.body.classList.contains('welcome-active') ? 'hidden' : '';
             buttons.forEach(b => b.setAttribute('aria-expanded', 'false'));
@@ -812,6 +931,25 @@
             if (overlayTriggerButton) {
                 overlayTriggerButton.focus();
             }
+
+            let closed = false;
+            const finalizeClose = () => {
+                if (closed) {
+                    return;
+                }
+                closed = true;
+                overlay.classList.remove('open');
+                overlay.removeEventListener('transitionend', onTransitionEnd);
+            };
+
+            const onTransitionEnd = (event) => {
+                if (event.target === overlay) {
+                    finalizeClose();
+                }
+            };
+
+            overlay.addEventListener('transitionend', onTransitionEnd);
+            window.setTimeout(finalizeClose, 420);
         }
 
         function enterMuseum(options = {}) {
@@ -849,6 +987,14 @@
             arrow.style.transform = `translateY(${offset}px)`;
         }
 
+        function syncActiveBlockHeight() {
+            const activeBlock = document.querySelector('.timeline-block.active');
+            if (!activeBlock) {
+                return;
+            }
+            container.style.minHeight = activeBlock.offsetHeight + 'px';
+        }
+
         function showEra(era) {
             blocks.forEach(b => b.classList.remove('active'));
             buttons.forEach(b => b.classList.remove('selected'));
@@ -857,9 +1003,9 @@
             if (block && btn) {
                 block.classList.add('active');
                 btn.classList.add('selected');
-                setTimeout(() => {
-                    container.style.minHeight = block.offsetHeight + 'px';
-                }, 10);
+                requestAnimationFrame(() => {
+                    syncActiveBlockHeight();
+                });
                 moveArrowToButton(btn);
                 selectedEra = era;
             }
@@ -914,6 +1060,17 @@
         window.addEventListener('resize', function() {
             const btn = document.querySelector('.timeline-btn.selected');
             if (btn) moveArrowToButton(btn);
+            syncActiveBlockHeight();
+        });
+
+        window.addEventListener('load', function() {
+            syncActiveBlockHeight();
+        });
+
+        blockImages.forEach((img) => {
+            if (!img.complete) {
+                img.addEventListener('load', syncActiveBlockHeight);
+            }
         });
 
         if (enterMuseumBtn) {

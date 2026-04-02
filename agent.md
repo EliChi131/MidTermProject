@@ -52,14 +52,6 @@ Each innovation opened new creative possibilities for players.
 - Electric guitar remains a symbol of creativity and personal expression.
 - Despite digital music trends, the guitar maintains cultural relevance in rock, pop, indie, and beyond.
 
-⭐ Purpose of This Outline
-This structure gives your VS Code AI:
-- A clear timeline
-- Defined eras
-- Key events and innovations
-- Cultural context
-- A framework to expand into paragraphs, artifacts, or exhibit descriptions
-
 
 The webpage should have "artifacts", images of key objects of importance related to the history of the electric guitar. 
 
